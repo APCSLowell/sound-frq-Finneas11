@@ -1,10 +1,9 @@
 import java.util.*;
+
 public class Sound
 {
   /** the array of values in this sound; guaranteed not to be null */
   int[] samples;
-
-
 
   /** Changes those values in this sound that have an amplitude greater than limit.
    *  Values greater than limit are changed to limit.
@@ -16,15 +15,17 @@ public class Sound
   public int limitAmplitude(int limit)
   {  
     int count = 0;
-    for( int i = 0; i < samples.length; i++) {
-    if(samples[i] > limit){ samples[i] = limit; count++} 
-      else if (samples[i] = -limit){samples[i] = -limit; count++; }
-      
+    for (int i = 0; i < samples.length; i++) {
+      if (samples[i] > limit) {
+        samples[i] = limit;
+        count++;
+      } else if (samples[i] < -limit) { 
+        samples[i] = -limit;
+        count++;
+      }
     }  
-      return count;
+    return count;
   }
-
-
 
   /** Removes all silence from the beginning of this sound.
    *  Silence is represented by a value of 0.
@@ -33,15 +34,21 @@ public class Sound
    */
   public void trimSilenceFromBeginning()
   {
-   int first = 0;
-    while( samples[first] == 0){
-      first++ }
+    int first = 0;
+    while (samples[first] == 0) {
+      first++;
+    }
 
-    int newR = new int[samples.length() - n];
+    int[] newR = new int[samples.length - first]; 
 
-    for (int i =0; i < newR.length; i ++ ){
-      newR[i] = samples[ i + first]; }
+    for (int i = 0; i < newR.length; i++) {
+      newR[i] = samples[i + first];
+    }
 
-    samples = newR; }
+    samples = newR;
   }
 }
+
+
+
+
